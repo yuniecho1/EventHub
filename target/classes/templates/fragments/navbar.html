@@ -1,0 +1,29 @@
+<div th:fragment="navbar">
+    <nav>
+        <div class="nav-left">
+            <a th:href="@{/dashboard}" class="escape-hatch">EventHub</a>
+        </div>
+
+        <!-- Center Search Form -->
+        <div class="nav-center">
+            <form th:action="@{/event/all}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="search events..." th:value="${query}" />
+            </form>
+        </div>
+
+        <div class="nav-right">
+            <a th:if="${userType != null and userType == 'student'}" th:href="@{/club/all}">All Clubs</a>
+            <a th:if="${userType != null and userType == 'student'}" th:href="@{/event/all}">All Events</a>
+
+            <!-- My Account Dropdown -->
+            <div class="dropdown">
+                <a href="#" class="dropbtn">My Account ▾</a>
+                <div class="dropdown-content">
+                    <a th:if="${userType != null and userType == 'student'}" th:href="@{/rsvps}">My RSVPs</a>
+                    <a th:if="${userType != null and userType == 'club_organiser'}" th:href="@{/my-clubs}">View My Clubs</a>
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>

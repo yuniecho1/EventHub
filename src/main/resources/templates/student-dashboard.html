@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">   
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+</head>
+<body>
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    
+    <main class="dashboard-main">
+        <section class="welcome-section">
+            <h1>Welcome back, <span th:text="${user.userName}">Student</span>!</h1>
+            <div class="user-info-badge">
+                <span class="user-role" th:text="${user.userType}">Student</span>
+            </div>
+        </section>
+
+        <section class="rsvp-events-section">
+            <div class="section-header">
+                <h2>My RSVP'd Events</h2>
+                <a href="#" class="view-all-link">View All</a>
+            </div>
+
+            <div th:if="${#lists.isEmpty(rsvpEvents)}" class="no-events-message">
+                <div class="no-events-content">
+                    <h3>No RSVP'd events</h3>
+                    <p>You have not RSVP'd to any events yet.</p>
+                    <a th:href="@{/event/all}" class="browse-events-btn">Browse All Events</a>
+                </div>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(rsvpEvents)}" class="events-grid">
+                <div th:each="event, iterStat : ${rsvpEvents}" 
+                     class="event-card"
+                     th:onclick="'window.location.href=\'/event/' + ${event.eventId} + '\''">
+                    
+                    <div class="event-image">
+                        <div class="image-placeholder">🖼️</div>
+                    </div>
+                    
+                    <div class="event-info">
+                        <div class="event-title" th:text="${event.eventTitle}">Event 1</div>
+                        <div class="event-organizer">Organiser: <span th:text="${'Club ' + event.club}">xxx</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="upcoming-events-section">
+            <div class="section-header">
+                <h2>Upcoming Events</h2>
+                <a th:href="@{/event/all}" class="view-all-link">View All</a>
+            </div>
+
+            <div th:if="${#lists.isEmpty(upcomingEvents)}" class="no-events-message">
+                <div class="no-events-content">
+                    <h3>No upcoming events</h3>
+                    <p>There are no upcoming events at the moment.</p>
+                    <a th:href="@{/event/all}" class="browse-events-btn">Browse All Events</a>
+                </div>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(upcomingEvents)}" class="events-grid">
+                <div th:each="event, iterStat : ${upcomingEvents}" 
+                     class="event-card"
+                     th:onclick="'window.location.href=\'/event/' + ${event.eventId} + '\''">
+                    
+                    <div class="event-image">
+                        <div class="image-placeholder">🖼️</div>
+                    </div>
+                    
+                    <div class="event-info">
+                        <div class="event-title" th:text="${event.eventTitle}">Event 1</div>
+                        <div class="event-organizer">Organiser: <span th:text="${'Club ' + event.club}">xxx</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="past-events-section">
+            <div class="section-header">
+                <h2>Past Events</h2>
+            </div>
+
+            <div th:if="${#lists.isEmpty(pastEvents)}" class="no-events-message">
+                <div class="no-events-content">
+                    <h3>No past events</h3>
+                    <p>You haven't attended any events yet.</p>
+                    <a th:href="@{/event/all}" class="browse-events-btn">Browse Upcoming Events</a>
+                </div>
+            </div>
+
+            <div th:unless="${#lists.isEmpty(pastEvents)}" class="events-grid">
+                <div th:each="event, iterStat : ${pastEvents}" 
+                     class="event-card past-event-card"
+                     th:onclick="'window.location.href=\'/event/' + ${event.eventId} + '\''">
+                    
+                    <div class="event-image">
+                        <div class="image-placeholder">🖼️</div>
+                    </div>
+                    
+                    <div class="event-info">
+                        <div class="event-title" th:text="${event.eventTitle}">Event 1</div>
+                        <div class="event-organizer">Organiser: <span th:text="${'Club ' + event.club}">xxx</span></div>
+                        <div class="event-date" th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">Date</div>
+                        <div class="feedback-status">
+                            <span class="feedback-prompt">💬 Leave feedback</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script th:src="@{/js/dashboard.js}"></script>
+     
+</html>

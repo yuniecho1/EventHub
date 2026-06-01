@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.0">
+  <diagram name="Page-1" id="3g3V48eXxT9uWFGdtOXb">
+    <mxGraphModel dx="1426" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-10" value="&lt;div&gt;Docker Container&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="560" width="205" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-9" value="&lt;div&gt;Docker Container&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="117.5" y="320" width="205" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-8" value="&lt;div&gt;Docker Container&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="117.5" y="560" width="205" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-1" value="Java Frontend (Thymeleaf template)" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-3" value="SprintBoot Backend" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="600" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-4" value="Database" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.mysql_db_instance_2;fillColor=#2E73B8;gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="552.5" y="598.5" width="60" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-11" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="qMx_-KkcPxEOVh8ABqAm-8" target="qMx_-KkcPxEOVh8ABqAm-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="540" as="sourcePoint" />
+            <mxPoint x="220" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-14" value="REST API" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="qMx_-KkcPxEOVh8ABqAm-11" vertex="1" connectable="0">
+          <mxGeometry x="0.2733" y="-2" relative="1" as="geometry">
+            <mxPoint x="-2" y="13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-12" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="qMx_-KkcPxEOVh8ABqAm-8" target="qMx_-KkcPxEOVh8ABqAm-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="670" as="sourcePoint" />
+            <mxPoint x="410" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-13" value="JDBC Connector" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="qMx_-KkcPxEOVh8ABqAm-12" vertex="1" connectable="0">
+          <mxGeometry x="-0.1574" y="-1" relative="1" as="geometry">
+            <mxPoint x="8" y="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-15" value="GitHub Actions Pipeline" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="270" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-16" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.github_code;pointerEvents=1;" parent="1" vertex="1">
+          <mxGeometry x="660" y="270" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.587;entryY=-0.008;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="qMx_-KkcPxEOVh8ABqAm-15" target="qMx_-KkcPxEOVh8ABqAm-10" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-20" value="&lt;div&gt;Update Condition&lt;/div&gt;&lt;div&gt;(example push to main)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="qMx_-KkcPxEOVh8ABqAm-17" vertex="1" connectable="0">
+          <mxGeometry x="-0.1051" y="-3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.985;entryY=0.367;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="qMx_-KkcPxEOVh8ABqAm-15" target="qMx_-KkcPxEOVh8ABqAm-9" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.002;entryY=0.176;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="qMx_-KkcPxEOVh8ABqAm-15" target="qMx_-KkcPxEOVh8ABqAm-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="qMx_-KkcPxEOVh8ABqAm-21" value="&lt;div&gt;Update Condition&lt;/div&gt;&lt;div&gt;(example push to main)&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="410" y="380" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

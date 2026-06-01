@@ -1,0 +1,796 @@
+/* General Page Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 2em;
+}
+
+/* Error Message */
+p[style*="color:red"] {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form Styles (optional if reused on the create page) */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+form {
+    max-width: 600px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1.5px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    display: block;
+    width: 100%;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.other-content {
+    margin-top: 40px;
+}
+
+/* Button Style */
+
+/* Button container */
+.dashboard-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.dashboard-buttons button {
+    width: 300px;
+    padding: 25px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.dashboard-buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.event-details-card {
+    max-width: 700px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.event-header {
+    margin-bottom: 20px;
+}
+
+.event-header h2 {
+    margin: 0 0 20px 0;
+    color: #2c3e50;
+    font-size: 1.8em;
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f4f6f9;
+}
+
+.event-tag {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.event-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.rsvp-button,
+.share-button,
+.edit-button,
+.delete-button,
+.ban-button,
+.unban-button,
+.add-picture-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 100px;
+}
+
+.rsvp-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.rsvp-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+/* Share Button - Success Green */
+.share-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.share-button:hover {
+    background-color: #218838;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.edit-button {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.edit-button:hover {
+    background-color: #e0a800;
+    color: #212529;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.ban-button {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.ban-button:hover {
+    background-color: #e5670c;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.unban-button {
+    background-color: #28a745;
+    color: white;
+}
+
+.unban-button:hover {
+    background-color: #218838;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.add-picture-button {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.add-picture-button:hover {
+    background-color: #138496;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.event-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.event-info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.event-info-right {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    border-left: none;
+    margin-bottom: 8px;
+}
+
+.info-item label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+    display: inline;
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.info-item span {
+    color: #333;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.event-description {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+.event-description label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    display: inline;
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.event-description p {
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1em;
+}
+
+.event-pictures {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.pictures-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.picture-placeholder {
+    width: 120px;
+    height: 120px;
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    color: #6c757d;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    font-size: 1em;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+.error-message p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.no-event-message {
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.1em;
+    margin: 40px 0;
+}
+
+/* Responsive adjustments for event details */
+@media (max-width: 768px) {
+    .event-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .event-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .event-details-card {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .event-buttons {
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    
+    .rsvp-button,
+    .share-button,
+    .edit-button,
+    .delete-button,
+    .add-picture-button {
+        flex: none;
+        min-width: auto;
+        padding: 8px 16px;
+        font-size: 0.9em;
+    }
+    
+    .pictures-container {
+        justify-content: center;
+    }
+    
+    .picture-placeholder {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5em;
+    }
+}
+.rsvp-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.rsvp-button:hover {
+    background-color: #0056b3;
+}
+
+.rsvp-button.going {
+    background-color: #28a745;
+}
+
+.rsvp-button.going:hover {
+    background-color: #218838;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding-left: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+/* Updated Feedback Section Styles */
+.feedback-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.feedback-section h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+
+.feedback-section h4 {
+    color: #495057;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.feedback-form {
+    display: none;
+    margin-top: 15px;
+}
+
+.feedback-form.show {
+    display: block;
+}
+
+.feedback-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 80px;
+    box-sizing: border-box;
+}
+
+.feedback-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.rating-section {
+    margin: 15px 0;
+}
+
+.rating-stars {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+    direction: ltr;
+    justify-content: flex-start;
+}
+
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    font-size: 24px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
+    order: initial;
+}
+
+.rating-stars input[type="radio"]:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]:checked ~ input[type="radio"] + label {
+    color: #ddd;
+}
+
+.rating-stars input[type="radio"]#star1:checked ~ label,
+.rating-stars input[type="radio"]#star1:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]#star2:checked ~ label:nth-of-type(-n+4),
+.rating-stars input[type="radio"]#star2:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]#star3:checked ~ label:nth-of-type(-n+6),
+.rating-stars input[type="radio"]#star3:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]#star4:checked ~ label:nth-of-type(-n+8),
+.rating-stars input[type="radio"]#star4:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]#star5:checked ~ label,
+.rating-stars input[type="radio"]#star5:checked + label {
+    color: #ffd700;
+}
+
+.rating-stars input[type="radio"]:not(:checked) + label {
+    color: #ddd;
+}
+
+.rating-stars label:hover {
+    color: #ffd700;
+}
+
+.star-display {
+    color: #ffc107;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.star-display.empty {
+    color: #ddd;
+}
+
+.char-counter {
+    font-size: 12px;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.char-counter.warning {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.feedback-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.feedback-button:hover {
+    background-color: #218838;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.feedback-button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.feedback-button.cancel-button {
+    background-color: #6c757d;
+    margin-left: 0;
+}
+
+.feedback-button.cancel-button:hover {
+    background-color: #5a6268;
+}
+
+.user-feedback-display {
+    background-color: #e8f5e8;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.feedback-item {
+    margin-bottom: 10px;
+}
+
+.feedback-rating {
+    margin-bottom: 10px;
+}
+
+.feedback-rating span {
+    font-weight: 600;
+}
+
+.star-display {
+    color: #ffc107;
+    font-size: 18px;
+}
+
+.star-display.empty {
+    color: #ddd;
+}
+
+.feedback-text {
+    background-color: white;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+}
+
+.feedback-text p {
+    margin: 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+.feedback-date {
+    text-align: right;
+    color: #6c757d;
+}
+
+.feedback-eligibility {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.info-message {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #bee5eb;
+    text-align: center;
+}
+
+.info-message p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.update-role-form {
+    margin-top: 10px;
+    max-width: 225px;
+}
+
+.all-feedback-section {
+    margin-top: 40px;
+    padding: 25px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.all-feedback-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.feedback-summary {
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-left: 4px solid #007bff;
+}
+
+.feedback-summary p {
+    margin: 8px 0;
+    font-size: 1.1em;
+}
+
+.feedback-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.feedback-item {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.feedback-user {
+    font-weight: 600;
+    color: #495057;
+}
+
+.feedback-rating {
+    margin: 10px 0;
+}
+
+.star-display {
+    color: #ffd700;
+    font-size: 1.2em;
+}
+
+.star-display.empty {
+    color: #ddd;
+}
+
+.feedback-text p {
+    margin: 10px 0 0 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.no-feedback-message {
+    text-align: center;
+    padding: 40px;
+    color: #6c757d;
+    font-style: italic;
+}

@@ -1,0 +1,244 @@
+/* Shared Table Styles */
+table.event-table,
+table.user-table,
+table.club-table {  /* Added club-table */
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table.event-table thead,
+table.user-table thead,
+table.club-table thead {  /* Added club-table */
+    background-color: #007bff;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+table.event-table th,
+table.event-table td,
+table.user-table th,
+table.user-table td,
+table.club-table th,
+table.club-table td {  /* Added club-table */
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.event-table tbody tr:hover,
+.user-table tbody tr:hover{
+    background-color: #f1f9ff;
+    cursor: pointer;
+}
+
+/* Clickable Rows */
+.clickable-event-row,
+.clickable-user-row {
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clickable-event-row:hover,
+.clickable-user-row:hover {  /* Added club-row */
+    background-color: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.clickable-event-row:active,
+.clickable-user-row:active,
+.clickable-club-row:active {  /* Added club-row */
+    transform: translateY(0);
+    background-color: #e9ecef;
+}
+
+/* Responsive Tables */
+@media (max-width: 768px) {
+    table.event-table,
+    table.user-table,
+    table.club-table,
+    table.event-table thead,
+    table.user-table thead,
+    table.club-table thead,
+    table.event-table tbody,
+    table.user-table tbody,
+    table.club-table tbody,
+    table.event-table th,
+    table.user-table th,
+    table.club-table th,
+    table.event-table td,
+    table.user-table td,
+    table.club-table td,
+    table.event-table tr,
+    table.user-table tr,
+    table.club-table tr {
+        display: block;
+        width: 100%;
+    }
+
+    table.event-table thead,
+    table.user-table thead,
+    table.club-table thead {
+        display: none;
+    }
+
+    table.event-table tr,
+    table.user-table tr,
+    table.club-table tr {
+        margin-bottom: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        background: #fff;
+        border-radius: 6px;
+        overflow: hidden;
+        padding: 10px;
+    }
+
+    table.event-table td,
+    table.user-table td,
+    table.club-table td {
+        padding: 10px;
+        text-align: right;
+        position: relative;
+        border: none;
+    }
+
+    table.event-table td::before,
+    table.user-table td::before,
+    table.club-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-weight: bold;
+        text-transform: capitalize;
+        color: #555;
+        text-align: left;
+    }
+}
+
+/* Table Controls */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    background: transparent;
+    width: auto;
+}
+
+/* Match search bar styling */
+.search-form {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 400px;
+    height: 34px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 0 10px;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    font-size: 0.95rem;
+    height: 100%;
+    line-height: 1;
+}
+
+.search-form input[type="text"]::placeholder {
+    color: #999;
+    opacity: 1;
+    font-style: italic;
+}
+
+/* Sort & Filter button styling */
+.sort-filter-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.sort-form,
+.filter-form {
+    margin: 8px 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-sizing: border-box;
+    height: auto;
+    width: auto;
+}
+
+.sort-select,
+.filter-select {
+    height: 34px;
+    width: 150px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    background: transparent;
+    font-size: 0.95rem;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, transform 0.1s;
+    padding: 0 10px;
+    margin: 0;
+}
+
+.sort-select:hover,
+.filter-select:hover {
+    background-color: #f1f9ff;
+}
+
+.sort-select:active,
+.filter-select:active {
+    background-color: #e9ecef;
+}
+
+/* Create Button */
+.create-button-container {
+    margin: 20px 0;
+}
+
+/* Button styling */
+.create-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.create-button:hover {
+    background-color: #218838;
+}
+
+/* Remove hover and pointer from club table rows */
+table.club-table tbody tr {
+    cursor: default !important;
+}
+
+table.club-table tbody tr:hover {
+    background-color: inherit !important;
+}
+
+.club-row {
+    cursor: default !important;
+    transition: inherit !important;
+}

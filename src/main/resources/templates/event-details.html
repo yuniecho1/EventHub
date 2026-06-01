@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Event Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">   
+</head>
+<body>
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+    <div class="form-container">
+        <div class="event-details-card">
+            <div class="event-header">
+                <h2 th:text="${event.eventTitle}">Event Title</h2>
+            </div>
+           
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}"></p>
+            </div>
+            
+            <div th:if="${success}" class="success-message">
+                <p th:text="${success}"></p>
+            </div>
+
+            <div th:if="${param.feedback != null && param.feedback[0] == 'success'}" class="success-message">
+                <p>Feedback submitted successfully!</p>
+            </div>
+            
+            <div th:if="${param.feedback != null && param.feedback[0] == 'error'}" class="error-message">
+                <p th:text="${param.message != null ? param.message[0] : 'Error submitting feedback'}"></p>
+            </div>
+           
+            <div th:if="${event}" class="event-content">
+                <div class="event-buttons" th:if="${showRSVP or showShare}">
+                    <form th:if="${showRSVP}" method="post" th:action="@{'/event/' + ${event.eventId} + '/rsvp'}" style="display: inline-block;">
+                        <button type="submit" class="rsvp-button" 
+                                th:class="${userHasRSVPd} ? 'rsvp-button going' : 'rsvp-button'"
+                                th:text="${userHasRSVPd} ? 'Going to the Event' : 'RSVP'">RSVP</button>
+                    </form>
+
+                    <button th:if="${showShare}" 
+                            class="share-button" 
+                            onclick="copyEventLink()"
+                            id="shareButton">
+                        Share
+                    </button>
+                </div>
+                
+                <div class="event-buttons" th:if="${showEdit or showDelete or showAddPicture}">
+                    <a th:if="${showEdit}" th:href="@{'/event/' + ${event.eventId} + '/edit'}" class="edit-button">Edit</a>
+                    <a th:if="${showDelete}" th:href="@{'/event/' + ${event.eventId} + '/delete'}" class="delete-button">Delete</a>
+                </div>
+
+                <!-- File upload section for organizers -->
+                <div th:if="${showAddPicture}" class="file-upload-section">
+                    <h3>Upload Event Photo</h3>
+                    <form method="POST" 
+                        enctype="multipart/form-data" 
+                        th:action="@{'/event/' + ${event.eventId} + '/upload'}"
+                        class="upload-form">
+                        
+                        <div class="upload-input-group">
+                            <label for="file" class="upload-label">Choose a file:</label>
+                            <input type="file" 
+                                class="upload-input" 
+                                id="file" 
+                                name="file" 
+                                accept="image/*,text/*"
+                                required>
+                        </div>
+
+                        <button type="submit" class="upload-button">Upload File</button>
+                    </form>
+                </div>
+               
+                <div class="event-info-grid">
+                    <div class="event-info-left">
+                        <div class="info-item">
+                            <label>Club:</label> <span th:text=${club.clubName}>club</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Organiser Email:</label> <span th:text=${club.userEmail}>email</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Tags:</label> <span th:text="${event.eventTag}">music, food</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Date:</label> <span th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">DD/MM/YYYY</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Location:</label> <span th:text="${event.location}">xxx</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Price:</label> <span th:text="${event.price}">$xx</span>
+                        </div>
+                    </div>
+                    
+                    <div class="event-info-right">
+                        <div class="event-description">
+                            <label>Event Description:</label> <span th:text="${event.eventDes}">abcdefg</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event photos carousel -->
+                <div class="event-pictures">
+                    <h3>Event Photos</h3>
+                    
+                    <div th:if="${eventPhotos != null and !eventPhotos.isEmpty()}" class="carousel-container">
+                        <div class="carousel">
+                            <button class="carousel-btn prev" onclick="moveSlide(-1)" aria-label="Previous photo">
+                                ❮
+                            </button>
+                            
+                            <div class="carousel-track">
+                                <div class="carousel-slide" th:each="photo, iterStat : ${eventPhotos}" 
+                                    th:classappend="${iterStat.index == 0} ? 'active' : ''">
+                                    <img th:src="@{'/photo/' + ${photo.photoId}}" 
+                                        alt="Event Photo" 
+                                        class="carousel-image">
+                                </div>
+                            </div>
+                            
+                            <button class="carousel-btn next" onclick="moveSlide(1)" aria-label="Next photo">
+                                ❯
+                            </button>
+                        </div>
+                        
+                        <!-- Carousel indicators/dots -->
+                        <div class="carousel-indicators">
+                            <span class="indicator" 
+                                th:each="photo, iterStat : ${eventPhotos}"
+                                th:classappend="${iterStat.index == 0} ? 'active' : ''"
+                                th:onclick="'goToSlide(' + ${iterStat.index} + ')'"></span>
+                        </div>
+                        
+                        <!-- Photo counter -->
+                        <div class="photo-counter">
+                            <span id="currentSlide">1</span> / <span th:text="${#lists.size(eventPhotos)}">1</span>
+                        </div>
+                    </div>
+                    
+                    <div th:if="${eventPhotos == null or eventPhotos.isEmpty()}" class="no-photos">
+                        <p>📷 No photos uploaded yet.</p>
+                    </div>
+                </div>
+
+                <div th:if="${user != null and user.userType == 'Student'}" class="feedback-eligibility">
+                    <div th:if="${!userHasRSVPd and !eventHasPassed}" class="info-message">
+                        <p>RSVP to this event to leave feedback after attending.</p>
+                    </div>
+                    
+                    <div th:if="${userHasRSVPd and !eventHasPassed}" class="info-message">
+                        <p>You're going to this event! Leave feedback after attending.</p>
+                    </div>
+                    
+                    <div th:if="${!userHasRSVPd and eventHasPassed}" class="info-message">
+                        <p>This event has ended. Only attendees can leave feedback.</p>
+                    </div>
+                </div>                
+
+                <div th:if="${showFeedback}" class="feedback-section">
+                    <h3>Event Feedback</h3>
+                    
+                    <div th:if="${hasSubmittedFeedback and userFeedback != null}" class="user-feedback-display">
+                        <h4>Your Feedback:</h4>
+                        <div class="feedback-item">
+                            <div class="feedback-rating">
+                                <span>Rating: </span>
+                                <span class="star-display" th:each="i : ${#numbers.sequence(1, userFeedback.rating)}">★</span>
+                                <th:block th:if="${userFeedback.rating < 5}">
+                                    <span class="star-display empty" th:each="i : ${#numbers.sequence(userFeedback.rating + 1, 5)}">☆</span>
+                                </th:block>
+                            </div>
+                            <div class="feedback-text">
+                                <p th:text="${userFeedback.feedbackText}">User feedback text</p>
+                            </div>
+                            <div class="feedback-date">
+                                <small th:text="'Submitted on: ' + ${#temporals.format(userFeedback.submissionDate, 'dd/MM/yyyy HH:mm')}">Date</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div th:unless="${hasSubmittedFeedback}">
+                        <button id="enterFeedbackBtn" class="feedback-button" onclick="showFeedbackForm()">
+                            Enter Feedback
+                        </button>
+                        
+                        <form id="feedbackForm" class="feedback-form" th:action="@{'/event/' + ${event.eventId} + '/feedback'}" method="post">
+                            <div>
+                                <label for="feedbackText">Your Feedback:</label>
+                                <textarea 
+                                    id="feedbackText" 
+                                    name="feedbackText" 
+                                    class="feedback-textarea" 
+                                    placeholder="Share your thoughts about this event (max 200 characters)"
+                                    maxlength="200"
+                                    required
+                                    oninput="updateCharCounter()"></textarea>
+                                <div id="charCounter" class="char-counter">0/200 characters</div>
+                            </div>
+                            
+                            <div class="rating-section">
+                                <label>Rating:</label>
+                                <div class="rating-stars" dir="ltr">
+                                    <input type="radio" id="star1" name="rating" value="1" required>
+                                    <label for="star1" title="1 star" data-rating="1">★</label>
+                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <label for="star2" title="2 stars" data-rating="2">★</label>
+                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <label for="star3" title="3 stars" data-rating="3">★</label>
+                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <label for="star4" title="4 stars" data-rating="4">★</label>
+                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <label for="star5" title="5 stars" data-rating="5">★</label>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 15px;">
+                                <button type="submit" class="feedback-button">Submit Feedback</button>
+                                <button type="button" class="feedback-button cancel-button" onclick="hideFeedbackForm()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div th:if="${showAllFeedback}" class="all-feedback-section">
+                    <h3>Event Feedback</h3>
+                    
+                    <div th:if="${allFeedback != null and !allFeedback.isEmpty()}">
+                        <div class="feedback-list">
+                            <div th:each="fb : ${allFeedback}" class="feedback-item">
+                                <div class="feedback-header">
+                                    <span class="feedback-user" th:text="${fb.userEmail}">user@email.com</span>
+                                    <span class="feedback-date">
+                                        <small th:text="${#temporals.format(fb.submissionDate, 'dd/MM/yyyy HH:mm')}">Date</small>
+                                    </span>
+                                </div>
+                                <div class="feedback-rating">
+                                    <span>Rating: </span>
+                                    <span class="star-display" th:each="i : ${#numbers.sequence(1, fb.rating)}">★</span>
+                                    <th:block th:if="${fb.rating < 5}">
+                                        <span class="star-display empty" th:each="i : ${#numbers.sequence(fb.rating + 1, 5)}">☆</span>
+                                    </th:block>
+                                </div>
+                                <div class="feedback-text">
+                                    <p th:text="${fb.feedbackText}">Feedback text here</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div th:if="${allFeedback == null or allFeedback.isEmpty()}" class="no-feedback-message">
+                        <p>No feedback has been submitted for this event yet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div th:unless="${event}" class="no-event-message">
+                <p>Event not found.</p>
+            </div>
+           
+            <div class="button-container">
+                <a href="/event/all" class="back-button">← Back to Events</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Share button functionality (copy link to clipboard)
+        function copyEventLink() {
+            const eventUrl = window.location.href;
+    
+            navigator.clipboard.writeText(eventUrl).then(() => {
+                showCopySuccess();
+            }).catch(err => {
+                console.error('Failed to copy link:', err);
+                alert('Failed to copy link');
+            });
+        }
+
+        function showCopySuccess() {
+            const shareButton = document.getElementById('shareButton');
+            const originalText = shareButton.textContent;
+            const originalColor = window.getComputedStyle(shareButton).backgroundColor;
+            
+            shareButton.textContent = 'Link Copied!';
+            shareButton.style.backgroundColor = '#28a745';
+            shareButton.disabled = true;
+            
+            setTimeout(() => {
+                shareButton.textContent = originalText;
+                shareButton.style.backgroundColor = originalColor;
+                shareButton.disabled = false;
+            }, 2000);
+        }
+
+        // Carousel functionality
+        let currentSlideIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const counter = document.getElementById('currentSlide');
+            
+            if (!slides.length) return;
+            
+            // Wrap around
+            if (index >= slides.length) {
+                currentSlideIndex = 0;
+            } else if (index < 0) {
+                currentSlideIndex = slides.length - 1;
+            } else {
+                currentSlideIndex = index;
+            }
+            
+            // Hide all slides and deactivate indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Show current slide and activate indicator
+            slides[currentSlideIndex].classList.add('active');
+            indicators[currentSlideIndex].classList.add('active');
+            
+            // Update counter
+            if (counter) {
+                counter.textContent = currentSlideIndex + 1;
+            }
+        }
+
+        function moveSlide(direction) {
+            showSlide(currentSlideIndex + direction);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        // Keyboard navigation for carousel
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                moveSlide(-1);
+            } else if (e.key === 'ArrowRight') {
+                moveSlide(1);
+            }
+        });
+
+        // Feedback form functionality
+        function showFeedbackForm() {
+            document.getElementById('feedbackForm').classList.add('show');
+            document.getElementById('enterFeedbackBtn').style.display = 'none';
+            document.getElementById('feedbackText').focus();
+        }
+        
+        function hideFeedbackForm() {
+            document.getElementById('feedbackForm').classList.remove('show');
+            document.getElementById('enterFeedbackBtn').style.display = 'inline-block';
+            document.getElementById('feedbackForm').reset();
+            updateCharCounter();
+        }
+        
+        function updateCharCounter() {
+            const textarea = document.getElementById('feedbackText');
+            const counter = document.getElementById('charCounter');
+            const currentLength = textarea.value.length;
+            
+            counter.textContent = currentLength + '/200 characters';
+            
+            if (currentLength > 180) {
+                counter.classList.add('warning');
+            } else {
+                counter.classList.remove('warning');
+            }
+        }
+
+        // Star rating functionality
+        function initializeStarRating() {
+            const stars = document.querySelectorAll('.rating-stars label');
+            const inputs = document.querySelectorAll('.rating-stars input[type="radio"]');
+            const starContainer = document.querySelector('.rating-stars');
+            
+            if (!stars.length || !inputs.length) return;
+
+            function clearStars() {
+                stars.forEach(star => star.style.color = '#ddd');
+            }
+
+            function highlightStars(rating) {
+                clearStars();
+                for (let i = 0; i < rating && i < stars.length; i++) {
+                    stars[i].style.color = '#ffd700';
+                }
+            }
+
+            function getCurrentRating() {
+                const checkedInput = document.querySelector('.rating-stars input[type="radio"]:checked');
+                return checkedInput ? parseInt(checkedInput.value) : 0;
+            }
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function() {
+                    const rating = index + 1;
+                    inputs[index].checked = true;
+                    highlightStars(rating);
+                });
+
+                star.addEventListener('mouseover', function() {
+                    const rating = index + 1;
+                    highlightStars(rating);
+                });
+            });
+
+            starContainer.addEventListener('mouseleave', function() {
+                const currentRating = getCurrentRating();
+                highlightStars(currentRating);
+            });
+
+            const initialRating = getCurrentRating();
+            if (initialRating > 0) {
+                highlightStars(initialRating);
+            }
+        }
+
+        // Initialize all functionality on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCharCounter();
+            initializeStarRating();
+            showSlide(0);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>RSVP Confirmation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 600px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        .header {
+            background: linear-gradient(90deg, #0078d4 0%, #00b4ff 100%);
+            color: #fff;
+            padding: 24px 0;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        .event-details {
+            margin: 24px 0;
+            padding: 16px;
+            background: #f1f7ff;
+            border-radius: 8px;
+        }
+        .event-details h2 {
+            margin-top: 0;
+            color: #0078d4;
+        }
+        .status {
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: 32px;
+        }
+        .btn {
+            display: inline-block;
+            background: #0078d4;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RSVP Confirmation</h1>
+        </div>
+        <p>Hi <span th:text="${userName != null ? userName : 'Student'}"></span>,</p>
+        <p class="status">You have successfully RSVP'd to the event below!</p>
+        <div class="event-details">
+            <h2 th:text="${eventTitle}">Event Name</h2>
+            <p><strong>Date &amp; Time:</strong> <span th:text="${eventDateTime}">Event Date & Time</span></p>
+            <p><strong>Location:</strong> <span th:text="${eventLocation}">Event Location</span></p>
+            <p><strong>RSVP Status:</strong> Confirmed</p>
+        </div>
+        <p>
+            We look forward to seeing you at the event.<br>
+        </p>
+        <a th:href="${eventLink}" class="btn">View Event Details</a>
+        <div class="footer">
+            &copy; 2025 EventHub RMIT &mdash; This is an automated confirmation. Please do not reply.
+        </div>
+    </div>
+</body>
+</html>

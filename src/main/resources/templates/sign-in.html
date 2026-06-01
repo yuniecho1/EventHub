@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign In</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="form-container">
+    <form th:action="@{/sign-in}" th:object="${user}" method="post">
+
+        <h1>Sign In</h1>
+
+        <p th:if="${successMessage}" th:text="${successMessage}" style="color:green; font-weight:bold;"></p>
+        <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" th:field="*{email}" required />
+
+        <label for="password">Password:</label>
+        <input id="password" type="password" th:field="*{password}" required />
+
+        <div style="text-align: center;">
+            <button type="submit">Sign In</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <span>Don't have an account? </span>
+            <a th:href="@{/sign-up}" style="color: #007bff; text-decoration: none;">Sign Up</a>
+        </div>
+        
+
+    </form>
+    </div>
+
+    <div class="other-content">
+        
+    </div>
+
+    <script th:src="@{/js/submitForm.js}"></script>
+    <script>
+        attachForms([
+            { formId: 'SigninForm', successUrl: '/dashboard', fallbackUrl: '/' }
+        ]);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Cancelled</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: #fff;
+            max-width: 600px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 32px;
+        }
+        .header {
+            background: linear-gradient(90deg, #dc3545 0%, #fd7e14 100%);
+            color: #fff;
+            padding: 24px 0;
+            border-radius: 12px 12px 0 0;
+            text-align: center;
+        }
+        .event-details {
+            margin: 24px 0;
+            padding: 16px;
+            background: #fff5f5;
+            border-left: 4px solid #dc3545;
+            border-radius: 8px;
+        }
+        .event-details h2 {
+            margin-top: 0;
+            color: #dc3545;
+        }
+        .status {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+        .footer {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-top: 32px;
+        }
+        .btn {
+            display: inline-block;
+            background: #0078d4;
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 18px;
+            font-weight: 500;
+        }
+        .apology {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚠️ Event Cancelled</h1>
+        </div>
+        <p>Hi <span th:text="${userName != null ? userName : 'Student'}"></span>,</p>
+        <p class="status">Unfortunately, the event you RSVP'd to has been cancelled.</p>
+        
+        <div class="event-details">
+            <h2 th:text="${eventTitle}">Event Name</h2>
+            <p><strong>Original Date &amp; Time:</strong> <span th:text="${eventDateTime}">Event Date & Time</span></p>
+            <p><strong>Location:</strong> <span th:text="${eventLocation}">Event Location</span></p>
+            <p><strong>Status:</strong> <span style="color: #dc3545; font-weight: bold;">CANCELLED</span></p>
+        </div>
+
+        <div class="apology">
+            <p><strong>Reason:</strong> <span th:text="${cancellationReason}">The event organiser has cancelled this event.</span></p>
+        </div>
+
+        <p>
+            We sincerely apologize for any inconvenience this may cause. Please check out other upcoming events that might interest you.
+        </p>
+
+        <a href="https://localhost:8080/event/all" class="btn">Browse Other Events</a>
+
+        <div class="footer">
+            &copy; 2025 EventHub RMIT &mdash; This is an automated notification. Please do not reply.
+        </div>
+    </div>
+</body>
+</html>

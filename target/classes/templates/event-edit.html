@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Event</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+<body>
+
+<div class="form-container">
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+    <form th:action="@{'/event/' + ${event.eventId} + '/update'}" th:object="${event}" method="post">
+
+        <h1>Edit Event</h1>
+
+        <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+        <label for="eventTitle">Event Title:</label>
+        <input id="eventTitle" type="text" th:field="*{eventTitle}" />
+
+        <label for="clubId">Club:</label>
+        <select id="clubId" th:field="*{clubId}">
+            <option value="1">Tech Club</option>
+            <option value="2">Music Society</option>
+            <option value="3">Law Students Association</option>
+            <option value="4">STEM Innovators</option>
+            <option value="5">Career Builders</option>
+            <option value="6">Sports Club</option>
+        </select>
+
+        <fieldset>
+            <legend>Tags</legend>
+            <label><input type="radio" th:field="*{eventTag}" value="tech" /> Tech</label>
+            <label><input type="radio" th:field="*{eventTag}" value="music" /> Music</label>
+            <label><input type="radio" th:field="*{eventTag}" value="law" /> Law</label>
+            <label><input type="radio" th:field="*{eventTag}" value="STEM" /> STEM</label>
+            <label><input type="radio" th:field="*{eventTag}" value="careers" /> Careers</label>
+            <label><input type="radio" th:field="*{eventTag}" value="sport" /> Sport</label>
+        </fieldset>
+
+        <label for="eventDate">Date:</label>
+        <input id="eventDate" type="date" th:field="*{eventDate}" />
+
+        <label for="location">Location:</label>
+        <input id="location" type="text" th:field="*{location}" />
+
+        <label for="price">Price:</label>
+        <input id="price" type="text" th:field="*{price}" />
+
+        <label for="eventDes">Event Description:</label>
+        <textarea id="eventDes" th:field="*{eventDes}" rows="5"></textarea>
+
+        <div class="event-buttons">
+            <button type="submit">Update Event</button>
+            <a th:href="@{'/event/' + ${event.eventId}}" class="back-button">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+<div class="other-content">
+    
+</div>
+
+</body>
+</html>

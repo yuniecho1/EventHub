@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clubs</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <div th:fragment="clubTable(clubList, error, userType)">
+
+        <div class="table-controls">
+            <!-- Search Form -->
+            <form th:action="@{/club/all}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="Search clubs..." th:value="${query}" />
+            </form>
+
+            <!-- Create Club Button -->
+            <div class="create-button-container"
+                th:if="${userType != null and userType.equalsIgnoreCase('club_organiser')}">
+                <a th:href="@{/club/form}" class="create-button">Create Club</a>
+            </div>
+
+            <div class="sort-filter-container">
+                <!-- Club Tag Filter -->
+                <form th:action="@{/club/all}" method="get" class="filter-form">
+                    <select name="filteredTag" class="filter-select" onchange="this.form.submit()">
+                        <option value="" th:selected="${filteredTag == null or filteredTag == ''}">All Tags</option>
+                        <option th:each="tag : ${allClubTags}"
+                                th:value="${tag}"
+                                th:text="${tag}"
+                                th:selected="${tag == filteredTag}">
+                        </option>
+                    </select>
+                </form>
+
+                <!-- Organiser Filter -->
+                <form th:action="@{/club/all}" method="get" class="filter-form">
+                    <select name="filteredOrganiser" class="filter-select" onchange="this.form.submit()">
+                        <option value="" th:selected="${filteredOrganiser == null or filteredOrganiser == ''}">All Organisers</option>
+                        <option th:each="organiser : ${allOrganisers}"
+                                th:value="${organiser}"
+                                th:text="${organiser}"
+                                th:selected="${organiser == filteredOrganiser}">
+                        </option>
+                    </select>
+                </form>
+
+                <!-- Sort Form -->
+                <form th:action="@{/club/all}" method="get" class="sort-form">
+                    <select name="sort" class="sort-select" onchange="this.form.submit()">
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="name" th:selected="${sort == 'name'}">Sort by Name</option>
+                        <option value="tag" th:selected="${sort == 'tag'}">Sort by Tag</option>
+                        <option value="dateCreated" th:selected="${sort == 'dateCreated'}">Sort by Date Created</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <!-- No Clubs Message -->
+        <div th:if="${#lists.isEmpty(clubList)}">
+            <p>No clubs found.</p>
+        </div>
+
+        <!-- Club Table -->
+        <div th:unless="${#lists.isEmpty(clubList)}">
+            <table class="club-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Tag</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="club, iterStat : ${clubList}"
+                        th:classappend="${iterStat.index >= 5} ? 'hidden-row'"
+                        th:attr="data-clubid=${club.clubId}"
+                        class="club-row">
+                        <td data-label="Name" th:text="${club.clubName}">Sample Name</td>
+                        <td data-label="Description" th:text="${club.clubDescription}">Sample Description</td>
+                        <td data-label="Tag" th:text="${club.clubTag}">Sample Tag</td>
+                        <td data-label="Created" th:text="${#temporals.format(club.clubCreationDate, 'yyyy-MM-dd HH:mm')}">2025-01-01</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button th:if="${#lists.size(clubList) > 5}"
+                    id="viewMoreClubBtn"
+                    onclick="toggleViewMore('club-table', 'viewMoreClubBtn')">
+                View More
+            </button>
+        </div>
+    </div>
+
+    <script th:src="@{/js/toggleViewMore.js}"></script>
+</body>
+</html>

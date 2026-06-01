@@ -1,0 +1,115 @@
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+    <head></head>
+    <body>
+        <div th:fragment="eventTable(eventList, error)">
+            
+            <div class="table-controls">
+                <!-- Search Form -->
+                <form th:action="@{/event/all}" method="get" class="search-form">
+                    <input type="text" name="q" placeholder="search events..." th:value="${query}" />
+                </form>
+
+                <!-- Create Event Button -->
+                <div class="create-button-container"
+                    th:if="${userType != null and userType.equalsIgnoreCase('club_organiser')}">
+                    <a th:href="@{/event/form}" class="create-button">Create Event</a>
+                </div>
+
+                <div class="sort-filter-container">
+                    <!-- Event Tag Filter Form -->
+                    <form th:action="@{/event/all}" method="get" class="filter-form">
+                        <select name="filteredTag" class="filter-select" onchange="this.form.submit()">
+                            <option value="" th:selected="${filteredTag == null or filteredTag == ''}">All Tags</option>
+                            <option th:each="tag : ${allTags}"
+                                    th:value="${tag}"
+                                    th:text="${tag}"
+                                    th:selected="${tag == filteredTag}">
+                            </option>
+                        </select>
+                    </form>
+
+                    <!-- Club Filter -->
+                    <form th:action="@{/event/all}" method="get" class="filter-form">
+                        <select name="filteredClub" class="filter-select" onchange="this.form.submit()">
+                            <option value="" th:selected="${filteredClub == null or filteredClub == ''}">All Clubs</option>
+                            <option th:each="club : ${allClubs}"
+                                    th:value="${club}"
+                                    th:text="${club}"
+                                    th:selected="${club == filteredClub}">
+                            </option>
+                        </select>
+                    </form>
+
+                    <!-- Event Sort Form -->
+                    <form th:action="@{/event/all}" method="get" class="sort-form">
+                        <select name="sort" class="sort-select" onchange="this.form.submit()">
+                            <option value="" disabled selected>Sort By</option>
+                            <option value="title" th:selected="${sort == 'title'}">Sort by Title</option>
+                            <option value="date" th:selected="${sort == 'date'}">Sort by Date</option>
+                            <option value="location" th:selected="${sort == 'location'}">Sort by Location</option>
+                        </select>
+                    </form>
+                </div>
+            </div>
+
+            <div th:if="${#lists.isEmpty(eventList)}">
+                <p>No events found.</p>
+            </div>
+
+        <div th:unless="${#lists.isEmpty(eventList)}">
+            <table class="event-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Tag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="event, iterStat : ${eventList}"
+                        th:classappend="${iterStat.index >= 5} ? 'hidden-row'"
+                        class="clickable-event-row"
+                        style="cursor: pointer;"
+                        th:attr="data-event=${event.eventId}">             
+
+                            <td data-label="Title" th:text="${event.eventTitle}">Sample Title</td>
+                            <td data-label="Date" th:text="${event.eventDate}">2025-01-01</td>
+                            <td data-label="Description" th:text="${event.eventDes}">Sample Description</td>
+                            <td data-label="Location" th:text="${event.location}">Melbourne</td>
+                            <td data-label="Price" th:text="${event.price}">$100</td>
+                            <td data-label="Tag" th:text="${event.eventTag}">Sports</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button th:if="${#lists.size(eventList) > 5}"
+                        id="viewMoreEventBtn"
+                        onclick="toggleViewMore('event-table', 'viewMoreEventBtn')">
+                    View More
+                </button>
+            </div>
+
+            <!-- Hidden form for POST click -->
+            <form id="eventClickForm" th:action="@{/event/all}" method="post" style="display:none;">
+                <input type="hidden" id="eventIdInput" name="eventId" />
+            </form>
+
+            <script th:src="@{/js/toggleViewMore.js}"></script>
+
+            <!-- JS to submit POST when row is clicked -->
+                 <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.querySelectorAll(".clickable-event-row").forEach(row => {
+                        row.addEventListener("click", () => {
+                            window.location.href = "/event/" + row.dataset.event;
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </body>
+    </html>

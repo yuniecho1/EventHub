@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: au.edu.rmit.sept.webapp.User.UserServiceTest
+-------------------------------------------------------------------------------
+Tests run: 24, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.193 s -- in au.edu.rmit.sept.webapp.User.UserServiceTest

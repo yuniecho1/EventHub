@@ -1,0 +1,118 @@
+/* Navbar layout */
+nav {
+    position: relative;        /* fix invalid display */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;                /* space between links */
+}
+
+/* Center search form horizontally */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+/* Links */
+nav .nav-left a,
+nav .nav-right a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+nav .nav-left a.escape-hatch {
+    font-size: 1.4em;
+}
+
+nav .nav-left a:hover,
+nav .nav-right a:hover {
+    text-decoration: underline;
+}
+
+/* Search form */
+.nav-center .search-form {
+    display: flex;
+    width: 500px;
+    max-width: 600px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    align-items: center;
+    padding: 0;
+    height: 28px;
+}
+
+.nav-center .search-form input[type="text"] {
+    flex: 1;
+    border: 0;           /* remove default border */
+    outline: 0;          /* remove outline */
+    margin: 0;           /* remove default margin */
+    padding: 0 6px;      /* horizontal padding only */
+    font-size: 1em;
+    height: 100%;        /* fill form height */
+    box-sizing: border-box;
+}
+
+/* Dropdown menu */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 0px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #007bff;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    color: #fff;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+}
+
+.dropdown-content a:hover {
+    background-color: #006bdd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Placeholder styling */
+.search-form input::placeholder {
+    color: #aaa;
+    font-style: italic;
+    font-size: 0.9em;
+}

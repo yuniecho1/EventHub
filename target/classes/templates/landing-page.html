@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Event Management System</title>
+    <link rel="stylesheet" th:href="@{/css/landing-page.css}">
+</head>
+<body>
+    <div class="landing-container">
+        <div class="landing-header">
+            <h1 class="landing-title">Event Management System</h1>
+            <p class="landing-subtitle">Discover, Create, and Manage Amazing Events</p>
+        </div>
+        
+        <div class="landing-buttons">
+            <a href="/sign-up" class="btn btn-primary landing-btn">Sign Up</a>
+            <a href="/sign-in" class="btn btn-secondary landing-btn">Sign In</a>
+        </div>
+        
+        <div class="landing-features">
+            <div class="feature">
+                <h3>Create Events</h3>
+                <p>Organize and manage your events with ease</p>
+            </div>
+            <div class="feature">
+                <h3>RSVP to Events</h3>
+                <p>Join events and stay connected with your community</p>
+            </div>
+            <div class="feature">
+                <h3>Stay Updated</h3>
+                <p>Get reminders about upcoming events</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

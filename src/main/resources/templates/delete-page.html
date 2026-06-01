@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Confirm Delete Event</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+<body>
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+    <div class="form-container">
+        <div class="event-details-card">
+            <div class="event-header">
+                <h2 th:text="${event.eventTitle}">Event Title</h2>
+            </div>
+            
+            <h1 style="color: #dc3545; text-align: center; margin-bottom: 20px;">Confirm Delete</h1>
+           
+            <div class="error-message" th:if="${error}">
+                <p th:text="${error}"></p>
+            </div>
+           
+            <div th:if="${event}" class="event-content">
+                <div class="event-info-grid">
+                    <div class="event-info-left">
+                        <div class="info-item">
+                            <label>Club:</label> <span>def</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Organiser:</label> <span>Me</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Tags:</label> <span th:text="${event.eventTag}">Tag</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Date:</label> <span th:text="${#temporals.format(event.eventDate, 'dd/MM/yyyy')}">Event Date</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Time:</label> <span>xx:xx PM</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Location:</label> <span th:text="${event.location}">Event Location</span>
+                        </div>
+                        
+                        <div class="info-item">
+                            <label>Price:</label> <span th:text="${event.price}">Event Price</span>
+                        </div>
+                    </div>
+                    
+                    <div class="event-info-right">
+                        <div class="event-description">
+                            <label>Event Description:</label> <span th:text="${event.eventDes}">Event Description</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-pictures">
+                    <div class="pictures-container">
+                        <div class="picture-placeholder">🖼️</div>
+                        <div class="picture-placeholder">🖼️</div>
+                    </div>
+                </div>
+               
+                <div class="delete-warning" style="background-color: #f8d7da; color: #721c24; padding: 20px; border-radius: 8px; margin: 30px 0; border: 1px solid #f5c6cb; text-align: center;">
+                    <p style="margin: 0 0 10px 0; font-size: 1.2em;"><strong>⚠️ Are you sure you want to delete this event?</strong></p>
+                    <p style="margin: 0; font-weight: 600;">This action cannot be undone.</p>
+                </div>
+               
+                <div class="event-buttons" style="justify-content: center; gap: 20px;">
+                    <form method="post" th:action="@{'/event/' + ${event.eventId} + '/delete'}" style="display: inline-block;">
+                        <button type="submit" class="delete-button" style="min-width: 150px;">Yes, Delete Event</button>
+                    </form>
+                    <a th:href="@{'/event/' + ${event.eventId}}" class="back-button" style="min-width: 150px; text-align: center;">Cancel</a>
+                </div>
+            </div>
+           
+            <div th:unless="${event}" class="no-event-message">
+                <p>Event not found.</p>
+                <div class="button-container">
+                    <a href="/event/all" class="back-button">← Back to Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/submitForm.js}"></script>
+    <script>
+        attachForms([
+            { formId: 'deleteEventForm', successUrl: '/event/all', fallbackUrl: '/dashboard' }
+        ]);
+    </script>
+</body>
+</html>

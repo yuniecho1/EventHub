@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Club</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+<body>
+
+<!-- Include Navbar -->
+<header th:replace="~{fragments/navbar :: navbar}"></header>
+
+<div class="form-container">
+<form th:action="@{/club/create}" th:object="${club}" method="post" 
+        class="transient-form" 
+        data-success="/club/all" 
+        data-fallback="/dashboard" id="createClubForm">
+      
+        <h1>Create Club</h1>
+
+        <p id="errorMsg" th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+        <label for="clubName">Club Name:</label>
+        <input id="clubName" type="text" th:field="*{clubName}" />
+
+        <label for="clubDescription">Club Description:</label>
+        <input id="clubDescription" type="text" th:field="*{clubDescription}" />
+
+        <fieldset>
+            <legend>Tags</legend>
+            <label><input type="radio" th:field="*{clubTag}" value="tech" /> Tech</label>
+            <label><input type="radio" th:field="*{clubTag}" value="music" /> Music</label>
+            <label><input type="radio" th:field="*{clubTag}" value="law" /> Law</label>
+            <label><input type="radio" th:field="*{clubTag}" value="STEM" /> STEM</label>
+            <label><input type="radio" th:field="*{clubTag}" value="careers" /> Careers</label>
+            <label><input type="radio" th:field="*{clubTag}" value="sport" /> Sport</label>
+        </fieldset>
+
+        <div style="text-align: center;">
+            <button type="submit">Create Club</button>
+        </div>
+
+    </form>
+    </div>
+
+    <div class="other-content"></div>
+
+    <script th:src="@{/js/submitForm.js}"></script>
+    <script>
+        attachForms([
+            { formId: 'createClubForm', successUrl: '/club/all', fallbackUrl: '/dashboard' }
+        ]);
+    </script>
+
+</body>
+</html>

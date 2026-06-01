@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<div class="form-container">
+    <form th:action="@{/sign-up}" th:object="${user}" method="post">
+
+        <h1>Sign Up</h1>
+
+        <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+        <label for="firstName">First Name:</label>
+        <input id="firstName" type="text" th:field="*{firstName}" required />
+
+        <label for="surname">Surname:</label>
+        <input id="surname" type="text" th:field="*{surname}" required />
+
+        <fieldset>
+            <legend>Role</legend>
+            <label><input type="radio" th:field="*{role}" value="Student" required /> Student</label>
+            <label><input type="radio" th:field="*{role}" value="Club_Organiser" required /> Club Organiser</label>
+        </fieldset>
+
+        <label for="email">Email:</label>
+        <input id="email" type="email" th:field="*{email}" required />
+
+        <label for="password">Password:</label>
+        <input id="password" type="password" th:field="*{password}" required />
+        <small style="color: #666; font-size: 0.9em;">
+            Password must be at least 8 characters and contain uppercase, lowercase, and numbers
+        </small>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input id="confirmPassword" type="password" th:field="*{confirmPassword}" required />
+
+        <div style="text-align: center;">
+            <button type="submit">Sign Up</button>
+        </div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <span>Already have an account? </span>
+            <a th:href="@{/sign-in}" style="color: #007bff; text-decoration: none;">Sign In</a>
+        </div>
+
+    </form>
+    </div>
+
+    <div class="other-content">
+        
+    </div>
+
+    <script th:src="@{/js/submitForm.js}"></script>
+    <script>
+        attachForms([
+            { formId: 'SignupForm', successUrl: '/club/all', fallbackUrl: '/dashboard' }
+        ]);
+    </script>
+
+</body>
+</html>

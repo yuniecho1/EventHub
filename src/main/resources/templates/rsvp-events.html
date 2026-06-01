@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Events</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+</head>
+<body>
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+    <h1>All Events</h1>
+    
+    <div th:if="${error}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+    
+    <div th:if="${#lists.isEmpty(rsvpEvents)}">
+        <p>Check back later.</p>
+    </div>
+    
+    <div th:unless="${#lists.isEmpty(rsvpEvents)}">
+        <table class="event-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Tag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="event, iterStat : ${rsvpEvents}"
+                    th:classappend="${iterStat.index >= 5} ? 'hidden-row'"
+                    class="clickable-event-row"
+                    th:onclick="'clickEvent(' + ${event.eventId} + ')'">
+                    <td data-label="Title" th:text="${event.eventTitle}">Sample Title</td>
+                    <td data-label="Date" th:text="${event.eventDate}">2025-01-01</td>
+                    <td data-label="Description" th:text="${event.eventDes}">Sample Description</td>
+                    <td data-label="Location" th:text="${event.location}">Melbourne</td>
+                    <td data-label="Price" th:text="${event.price}">$100</td>
+                    <td data-label="Tag" th:text="${event.eventTag}">Sports</td>
+                </tr>
+            </tbody>
+        </table>
+        <button id="viewMoreBtn" onclick="toggleViewMore()">View More</button>
+        
+        <form id="eventClickForm" th:action="@{/event/all}" method="post" style="display:none;">
+            <input type="hidden" id="eventIdInput" name="eventId" />
+        </form>
+    </div>
+    
+    <script th:src="@{/js/eventToggle.js}"></script>
+    <script>
+        function clickEvent(eventId) {
+            document.getElementById('eventIdInput').value = eventId;
+            document.getElementById('eventClickForm').submit();
+        }
+    </script>
+</body>
+</html>

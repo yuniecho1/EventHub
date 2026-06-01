@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+    <div th:fragment="userTable(userList, error)">
+
+        <div class="table-controls">
+            <!-- Search Form -->
+            <form th:action="@{/user/all}" method="get" class="search-form">
+                <input type="text" name="q" placeholder="search users..." th:value="${query}" />
+            </form>
+
+            <div class="sort-filter-container">
+                <!-- Filter Form -->
+                <form th:action="@{/user/all}" method="get" class="filter-form">
+                    <select name="filteredType" class="filter-select" onchange="this.form.submit()">
+                        <option value="" th:selected="${filteredType == null or filteredType == ''}">All Types</option>
+                        <option value="Student" th:selected="${filteredType == 'Student'}">Students</option>
+                        <option value="Club Organiser" th:selected="${filteredType == 'Club_Organiser'}">Club Organisers</option>
+                        <option value="Administrator" th:selected="${filteredType == 'Administrator'}">Administrators</option>
+                    </select>
+                </form>
+
+                <!-- Sort Form -->
+                <form th:action="@{/user/all}" method="get" class="sort-form">
+                    <select name="sort" class="sort-select" onchange="this.form.submit()">
+                        <option value="" disabled selected>Sort By</option>
+                        <option value="name" th:selected="${sort == 'name'}">Sort by Name</option>
+                        <option value="email" th:selected="${sort == 'email'}">Sort by Email</option>
+                        <option value="userType" th:selected="${sort == 'userType'}">Sort by User Type</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <div th:if="${#lists.isEmpty(userList)}">
+            <p>No users found.</p>
+        </div>
+
+        <div th:unless="${#lists.isEmpty(userList)}">
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>User Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user, iterStat : ${userList}"
+                        th:classappend="${iterStat.index >= 5} ? 'hidden-row'"
+                        class="clickable-user-row"
+                        th:attr="data-email=${user.userEmail}">
+
+                        <td data-label="Email" th:text="${user.userEmail}">sample@email.com</td>
+                        <td data-label="Name" th:text="${user.userName}">John Doe</td>
+                        <td data-label="User Type" th:text="${user.userType}">Admin</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button th:if="${#lists.size(userList) > 5}"
+                    id="viewMoreUserBtn"
+                    onclick="toggleViewMore('user-table', 'viewMoreUserBtn')">
+                View More
+            </button>
+        </div>
+            
+        <form id="userClickForm" th:action="@{/user/all}" method="post" style="display:none;">
+            <input type="hidden" id="userEmailInput" name="userEmail" />
+        </form>
+
+        <script th:src="@{/js/toggleViewMore.js}"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.querySelectorAll(".clickable-user-row").forEach(row => {
+                    row.addEventListener("click", () => {
+            document.getElementById("userEmailInput").value = row.dataset.email;
+            document.getElementById("userClickForm").submit();
+                    });
+                });
+            });
+        </script>
+
+    </div>
+</body>
+</html>

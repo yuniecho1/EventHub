@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+    <link rel="stylesheet" th:href="@{/css/table.css}" />
+</head>
+<body>
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+    <h2>All Users</h2>
+    <div th:replace="~{fragments/userTable :: userTable(${userList}, null)}"></div>
+
+    <!-- Error Message -->
+    <div th:if="${error}">
+        <p style="color: red;" th:text="${error}"></p>
+    </div>
+
+    <!-- reload for transient page skips -->
+    <script>
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
+
+</body>
+</html>

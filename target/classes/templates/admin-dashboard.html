@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+<body>
+
+    <!-- Include Navbar -->
+    <header th:replace="~{fragments/navbar :: navbar}"></header>
+
+    <main>
+        <h1>Admin Dashboard</h1>
+
+        <div class="dashboard-buttons">
+            <button onclick="window.location.href='/user/all'">Manage Users</button>
+            <button onclick="window.location.href='/event/all'">Manage Events</button>
+            <button onclick="window.location.href='/club/all'">Manage Clubs</button>
+        </div>
+    </main>
+    
+</body>
+</html>
